@@ -5,19 +5,20 @@ import { ListContact } from "./ListContact/ListContact";
 import { Filter } from "./Filter/Filter";
 
 export const App = () => {
-  const [contacts, setContact] = useState([]);
+
+ function takeLocal() {
+    const contacts = localStorage.getItem('contacts')
+      const localContacts = JSON.parse(contacts)
+   console.log(localContacts);
+   
+   return [...localContacts]
+  }
+
+
+  const [contacts, setContact] = useState( takeLocal());
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-  const contacts = localStorage.getItem('contacts')
-      const localContacts = JSON.parse(contacts)
-      console.log(localContacts);
-      if (localContacts.length > 0) {
-        setContact([...localContacts])
-      }
-   
 
-  }, [])
   useEffect(() => {
 
     localStorage.setItem("contacts", JSON.stringify(contacts))
